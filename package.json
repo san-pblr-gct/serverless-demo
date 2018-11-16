@@ -4,9 +4,11 @@
   "description": "",
   "main": "handler.js",
   "dependencies": {
+  
+  },
+  "devDependencies": {
     "serverless-secrets-plugin": "^0.1.0"
   },
-  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
