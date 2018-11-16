@@ -3,6 +3,9 @@ plugins:
   - serverless-secrets-plugin
 provider:
   name: aws
+  stage: dev
+  apiKeys:
+    - ${self:custom.secrets.SESSION_KEY} # you can hide it in a serverless variable 
   runtime: nodejs8.10
   #vpc configuration
   vpc: 
@@ -11,7 +14,7 @@ provider:
     subnetIds:
       - ${self:custom.secrets.subnetIds1}
       - ${self:custom.secrets.subnetIds2}
-  stage: dev
+  
   region: eu-west-1
   apiName: demo 
   profile: EFDEV
@@ -32,8 +35,9 @@ functions:
       EMAIL_SERVICE_API_KEY: ${self:custom.secrets.EMAIL_SERVICE_API_KEY}
 
     events:
-     - schedule: rate(5 minutes) #cloudwatch scheduler
+   #  - schedule: rate(5 minutes) #cloudwatch scheduler
      - http:  
          path: demo
          method: get
          cors: true
+         private: true

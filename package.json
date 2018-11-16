@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "handler.js",
-  "dependencies": {
-  
-  },
+  "dependencies": {},
   "devDependencies": {
     "serverless-secrets-plugin": "^0.1.0"
   },
