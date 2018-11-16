@@ -12,7 +12,8 @@
 # Happy Coding!
 
 service: demo # NOTE: update this with your service name
-
+plugins:
+  - serverless-secrets-plugin
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
 # frameworkVersion: "=X.X.X"
@@ -21,11 +22,12 @@ provider:
   name: aws
   runtime: nodejs8.10
 
+
 # you can overwrite defaults here
   stage: dev
   region: eu-west-1
   apiName: demo 
-  profile: efdev
+  profile: EFDEV
   memorySize: 512
 
 # you can add statements to the Lambda function's IAM Role here
@@ -56,21 +58,24 @@ provider:
 #  exclude:
 #    - exclude-me.js
 #    - exclude-me-dir/**
+custom:
+  secrets: ${file(secrets.${opt:stage, self:provider.stage}.yml)}
 
 functions:
-  hello:
-    handler: handler.hello
+  demo:
+    handler: handler.demo
     name: demo
     description: Demo function in serverless
     environment: # Function level environment variables
-      testVar: 12345678
+      SESSION_KEY: ${self:custom.secrets.SESSION_KEY}
+      EMAIL_SERVICE_API_KEY: ${self:custom.secrets.EMAIL_SERVICE_API_KEY}
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
     events:
      - http:  
-         path: hello
+         path: demo
          method: get
          cors: true
 #      - s3: ${env:BUCKET}
