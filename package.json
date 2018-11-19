@@ -5,6 +5,7 @@
   "main": "handler.js",
   "dependencies": {},
   "devDependencies": {
+    "serverless-domain-manager": "^2.6.6",
     "serverless-secrets-plugin": "^0.1.0"
   },
   "scripts": {

@@ -1,6 +1,7 @@
 service: demo 
 plugins:
   - serverless-secrets-plugin
+  - serverless-domain-manager
 provider:
   name: aws
   stage: dev
@@ -24,6 +25,13 @@ provider:
 
 custom:
   secrets: ${file(secrets.${opt:stage, self:provider.stage}.yml)}
+  customDomain:
+    domainName: ${self:custom.secrets.customDomain}
+    basePath: 'demo'
+    stage: ${self:provider.stage}
+    certificateName: '*.eflangtech.com'
+    endpointType: 'regional'
+    createRoute53Record: false
 
 functions:
   demo:

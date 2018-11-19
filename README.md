@@ -3,6 +3,7 @@
 To install serverless <br />
 npm install serverless -g
 npm install serverless-secrets-plugin --save-D (for serverless secrets)
+npm install serverless-domain-manager --save-dev (for Custom domain)
 
 To configure Aws node js template <br />
 serverless create -t aws-nodejs
@@ -16,5 +17,7 @@ serverless encrypt --stage dev --password 'test'
 
 To decrypt it:
 serverless decrypt --stage dev --password 'test'
+
+
 
 
