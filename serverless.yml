@@ -18,7 +18,7 @@ provider:
   
   region: eu-west-1
   apiName: demo 
-  profile: EFDEV
+  profile: ${self:custom.secrets.profile}
   timeout: 60
   memorySize: 512
 
@@ -28,7 +28,7 @@ custom:
   customDomain:
     domainName: ${self:custom.secrets.customDomain}
     basePath: 'demo'
-    stage: ${self:provider.stage}
+    stage: ${opt:stage, self:provider.stage}
     certificateName: '*.eflangtech.com'
     endpointType: 'regional'
     createRoute53Record: false
@@ -48,4 +48,4 @@ functions:
          path: demo
          method: get
          cors: true
-         private: true
+         private: false
